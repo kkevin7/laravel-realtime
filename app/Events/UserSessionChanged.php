@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class UserSessionChanged implements ShouldBroadcast
 {
@@ -36,6 +37,9 @@ class UserSessionChanged implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+        Log::debug("Notification");
+        Log::debug("{$this->message}");
+        Log::debug("{$this->type}");
         return new PrivateChannel('notifications');
     }
 }
