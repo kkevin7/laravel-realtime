@@ -37,7 +37,6 @@ class UserSessionChanged implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        Log::debug("Notification");
         Log::debug("{$this->message}");
         Log::debug("{$this->type}");
         return new PrivateChannel('notifications');

@@ -27,7 +27,8 @@
 
                 <div class="card-body">
                     <div class="text-center">
-                        <img src="{{ asset('img/circle.png') }}" class="refresh" alt="circle" width="250" height="250">
+                        <img id="circle" src="{{ asset('img/circle.png') }}" class="refresh" alt="circle" width="250"
+                            height="250">
                         <p id="winner" class="display-1 d-none text-primary">10</p>
                     </div>
                 </div>
@@ -53,3 +54,39 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script type="module">
+    const circleElement = document.getElementById('circle');
+    const timerElement = document.getElementById('timer');
+    const winnerElement = document.getElementById('winner');
+    const betElement = document.getElementById('bet');
+    const resultElement = document.getElementById('result');
+
+    Echo.channel('game')
+    .listen('RemaningTimeChanged', (e) => {
+        timerElement.innerText = e.time;
+        circleElement.classList.add('refresh');
+        resultElement.innerText = '';
+        winnerElement.classList.add('d-none');
+        winnerElement.classList.remove('text-success');
+        winnerElement.classList.remove('text-danger');
+    })
+    .listen('WinnerNumberGenerated', (e) => {
+        circleElement.classList.remove('refresh');
+
+        let winner = e.number;
+        winnerElement.innerText = winner;
+        winnerElement.classList.remove('d-none');
+
+        let bet = betElement[betElement.selectedIndex].innerText;
+        if(bet == winner) {
+            resultElement.innerText = 'You WIN';
+            resultElement.classList.add('text-success');
+        }else{
+            resultElement.innerText = 'You LOST';
+            resultElement.classList.add('text-danger');
+        }
+    })
+</script>
+@endpush
