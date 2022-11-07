@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/users', 'users.showAll')->name('user.all');
+
 Route::view('/game', 'game.show')->name('game.show');
+
 Route::view('/chat', 'chat.show')->name('chat.show');
+Route::post('/chat/message', [ChatController::class, 'messageReceived'])->name('chat.message');
