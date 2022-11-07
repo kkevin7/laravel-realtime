@@ -23,3 +23,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::view('/users', 'users.showAll')->name('user.all');
 Route::view('/game', 'game.show')->name('game.show');
+Route::view('/chat', 'chat.show')->name('chat.show');

@@ -14,7 +14,7 @@ class GameExecutor extends Command
      *
      * @var string
      */
-    protected $signature = 'game:excute';
+    protected $signature = 'game:execute';
 
     /**
      * The console command description.
