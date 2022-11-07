@@ -2,7 +2,9 @@
 
 @push('styles')
 <style type="text/css">
-
+    #users>li {
+        cursor: pointer;
+    }
 </style>
 @endpush
 
@@ -57,23 +59,23 @@
     Echo.join('chat')
         .here((users) => {
             users.forEach((user, index) => {
-                const usersElements = document.getElementById('users');
-
                 let element = document.createElement('li');
+
                 element.setAttribute('id', user.id);
+                element.setAttribute('onclick', 'greetUser("'+ user.id +'")');
                 element.innerText = user.name;
 
-                usersElements.appendChild(element)
+                usersElement.appendChild(element)
             });
         })
         .joining((user) => {
-            const usersElements = document.getElementById('users');
-
             let element = document.createElement('li');
+
             element.setAttribute('id', user.id);
+            element.setAttribute('onclick', 'greetUser("'+ user.id +'")');
             element.innerText = user.name;
 
-            usersElements.appendChild(element)
+            usersElement.appendChild(element)
 
         })
         .leaving((user) => {
@@ -103,5 +105,11 @@
 
         messageElement.value = '';
     });
+</script>
+
+<script>
+    function greetUser(id){
+        window.axios.post('/chat/greet/'+ id);
+    }
 </script>
 @endpush
