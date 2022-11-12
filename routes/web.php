@@ -20,12 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/users', 'users.showAll')->name('user.all');
+    Route::view('/users', 'users.showAll')->name('user.all');
 
-Route::view('/game', 'game.show')->name('game.show');
+    Route::view('/game', 'game.show')->name('game.show');
 
-Route::view('/chat', 'chat.show')->name('chat.show');
-Route::post('/chat/message', [ChatController::class, 'messageReceived'])->name('chat.message');
-Route::post('/chat/greet/{user}', [ChatController::class, 'greetReceived'])->name('chat.greet');
+    Route::view('/chat', 'chat.show')->name('chat.show');
+    Route::post('/chat/message', [ChatController::class, 'messageReceived'])->name('chat.message');
+    Route::post('/chat/greet/{user}', [ChatController::class, 'greetReceived'])->name('chat.greet');
+});
