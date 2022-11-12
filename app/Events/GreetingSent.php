@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -23,7 +24,7 @@ class GreetingSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($user, $message)
+    public function __construct(User $user, $message)
     {
         $this->user = $user;
         $this->message = $message;
@@ -37,6 +38,6 @@ class GreetingSent implements ShouldBroadcast
     public function broadcastOn()
     {
         Log::debug("{$this->user->name}: {$this->message}");
-        return new PresenceChannel("chat.greet.{$this->user->id}");
+        return new PrivateChannel("chat.greet.{$this->user->id}");
     }
 }
