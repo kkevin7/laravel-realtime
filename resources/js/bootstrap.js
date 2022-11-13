@@ -37,11 +37,32 @@ window.Pusher = Pusher;
 //     enabledTransports: ["ws", "wss"],
 // });
 
+// window.Echo = new Echo({
+//     broadcaster: "pusher",
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+//     wsHost: `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+//     forceTLS: false,
+//     encrypted: false,
+//     enabledTransports: ["ws", "wss"],
+// });
+
+// window.Echo = new Echo({
+//     broadcaster: "pusher",
+//     key: import.meta.env.VITE_PUSHER_APP_KEY,
+//     wsHost: "127.0.0.1",
+//     wsPort: 6001,
+//     forceTLS: false,
+//     encrypted: true,
+//     disableStats: false,
+//     enabledTransports: ["ws", "wss"],
+// });
+
 window.Echo = new Echo({
     broadcaster: "pusher",
     key: import.meta.env.VITE_PUSHER_APP_KEY,
-    wsHost: `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+    wsHost: window.location.hostname,
+    wsPort: 6001,
     forceTLS: false,
-    encrypted: false,
-    enabledTransports: ["ws", "wss"],
+    disableStats: true,
 });
