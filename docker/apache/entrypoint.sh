@@ -12,6 +12,9 @@ supervisorctl reread
 supervisorctl update
 supervisorctl start chat-websockets:*
 
+# container IP
+hostname -i
+
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
 	set -- apachectl -D FOREGROUND "$@"

@@ -71,6 +71,9 @@ COPY ./apache/supervisor/chat-websockets.conf /etc/supervisor/conf.d/chat-websoc
 # Work directory
 WORKDIR /var/www/html/
 
+
+RUN echo 'ServerName 127.0.0.1' >> /etc/apache2/apache2.conf
+
 # Apache ENV
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
